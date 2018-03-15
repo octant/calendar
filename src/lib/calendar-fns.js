@@ -1,16 +1,21 @@
 export const previous = (year, month) => {
-  return (
-    new Date(year, month, 0 - ((new Date(year, month - 1, 1).getDay() - 1 + 7) % 7 + new Date(year, month, 0).getDate()))
-  )
+  const firstDayIndex = new Date(year, month - 1, 1).getDay()
+  const daysInMonth = new Date(year, month, 0).getDate()
+  const previousMonthFill = (1 + 7) % 7
+  const offset = firstDayIndex - previousMonthFill + daysInMonth
+
+  return new Date(year, month, 0 - offset)
 }
 
 export const next = (year, month) => {
-  return (
-    new Date(year, month + 1, 1 - (new Date(year, month + 1, 1)).getDay() + ((0 - 7) % 7))
-  )
+  const firstDayIndex = new Date(year, month + 1, 1).getDay()
+  const previousMonthFill = (0 - 7) % 7
+  const offset = firstDayIndex + previousMonthFill
+
+  return new Date(year, month + 1, 1 - offset)
 }
 
-export const current = (date) => {
+export const currentMonth = (date) => {
   return next(date.getFullYear(), date.getMonth() - 1)
 }
 
