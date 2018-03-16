@@ -2,6 +2,7 @@ import glamorous from 'glamorous'
 
 export const Container = glamorous.div({
   position: 'relative',
+  margin: 'auto',
   height: '28em',
   width: '23em',
   fontWeight: '400'
