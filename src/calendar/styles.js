@@ -62,6 +62,13 @@ export const YearControl = glamorous.a({
   lineHeight: '3em'
 })
 
+export const Button = glamorous.a({
+  textDecoration: 'none',
+  ':hover': {
+    cursor: 'pointer'
+  }
+})
+
 export const MonthControl = glamorous.div({
   position: 'absolute',
   left: '19.5em',

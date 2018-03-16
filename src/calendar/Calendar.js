@@ -19,7 +19,8 @@ import {
   MonthControl,
   CalendarArea,
   WeekDay,
-  Day
+  Day,
+  Button
 } from './styles'
 
 class Calendar extends Component {
@@ -99,15 +100,19 @@ class Calendar extends Component {
         <Container>
           <Header>
             <Time>{this.state.time}</Time>
-            <HeaderDate onClick={this.handleClick('today')}>March, 15 2018</HeaderDate>
+            <HeaderDate>
+              <Button onClick={this.handleClick('today')}>March, 15 2018</Button>
+            </HeaderDate>
           </Header>
           <Controls>
             <YearControl>
-              {this.state.currentDate.toLocaleString('en-us', { month: 'long' })}, {this.state.currentDate.getFullYear()}
+              <Button>
+                {this.state.currentDate.toLocaleString('en-us', { month: 'long' })}, {this.state.currentDate.getFullYear()}
+              </Button>
             </YearControl>
             <MonthControl>
-              <Octicon onClick={this.handleClick('prev')} name='chevron-up' />
-              <Octicon onClick={this.handleClick('next')} name='chevron-down' />
+              <Button onClick={this.handleClick('prev')}><Octicon name='chevron-up' /></Button>
+              <Button onClick={this.handleClick('next')}><Octicon name='chevron-down' /></Button>
             </MonthControl>
           </Controls>
           <CalendarArea>
