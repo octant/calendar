@@ -29,7 +29,6 @@ export const currentMonth = (date) => {
 }
 
 export const nextMonth = (date) => {
-  console.log(date)
   return next(date.getFullYear(), date.getMonth())
 }
 

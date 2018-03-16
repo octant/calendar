@@ -33,8 +33,6 @@ class Calendar extends Component {
 
     this.state = {
       currentDate: startDate,
-      currentYear: startDate.getFullYear(),
-      currentMonth: startDate.getMonth(),
       time: startDate,
       calendar: buildCalendar(currentMonth(startDate))
     }
@@ -64,10 +62,9 @@ class Calendar extends Component {
 
   handleNextClick () {
     const state = {}
-    const newMonth = new Date(this.state.currentYear, this.state.currentMonth + 1, 1)
+    const {currentDate} = this.state
+    const newMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1)
     state.currentDate = newMonth
-    state.currentYear = newMonth.getFullYear()
-    state.currentMonth = newMonth.getMonth()
     state.calendar = buildCalendar(nextMonth(this.state.currentDate))
 
     this.setState({...state})
@@ -75,10 +72,9 @@ class Calendar extends Component {
 
   handlePrevClick () {
     const state = {}
-    const newMonth = new Date(this.state.currentYear, this.state.currentMonth - 1, 1)
+    const {currentDate} = this.state
+    const newMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1)
     state.currentDate = newMonth
-    state.currentYear = newMonth.getFullYear()
-    state.currentMonth = newMonth.getMonth()
     state.calendar = buildCalendar(previousMonth(this.state.currentDate))
 
     this.setState({...state})
@@ -88,8 +84,6 @@ class Calendar extends Component {
     const state = {}
     const newMonth = new Date()
     state.currentDate = newMonth
-    state.currentYear = newMonth.getFullYear()
-    state.currentMonth = newMonth.getMonth()
     state.calendar = buildCalendar(currentMonth(newMonth))
     this.setState({...state})
   }
@@ -130,7 +124,7 @@ class Calendar extends Component {
                 <Button key={key}>
                   <Day
                     key={key}
-                    inCurrentMonth={date.getMonth() === this.state.currentMonth}
+                    inCurrentMonth={date.getMonth() === this.state.currentDate.getMonth()}
                     isToday={date.toLocaleDateString() === (new Date()).toLocaleDateString()}>
                     {date.getDate()}
                   </Day>
