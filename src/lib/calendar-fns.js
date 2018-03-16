@@ -1,15 +1,15 @@
-const previous = (year, month) => {
+const previous = (year, month, startDay = 0) => {
   const firstDayIndex = new Date(year, month - 1, 1).getDay()
   const daysInMonth = new Date(year, month, 0).getDate()
-  const previousMonthFill = (1 + 7) % 7
+  const previousMonthFill = (startDay + 7) % 7
   const offset = firstDayIndex - previousMonthFill + daysInMonth
 
-  return new Date(year, month, 0 - offset)
+  return new Date(year, month, 1 - offset)
 }
 
-const next = (year, month) => {
+const next = (year, month, startDay = 0) => {
   const firstDayIndex = new Date(year, month + 1, 1).getDay()
-  const previousMonthFill = (0 - 7) % 7
+  const previousMonthFill = (startDay - 7) % 7
   const offset = firstDayIndex + previousMonthFill
 
   return new Date(year, month + 1, 1 - offset)
