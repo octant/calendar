@@ -98,13 +98,15 @@ class Calendar extends Component {
   }
 
   render () {
+    const today = new Date()
     return (
       <ThemeProvider theme={theme}>
         <Container>
           <Header>
             <Time>{this.state.time}</Time>
             <HeaderDate>
-              <Button onClick={this.handleClick('today')}>March, 15 2018</Button>
+              <Button onClick={this.handleClick('today')}>
+                {today.toLocaleString('en-us', { month: 'long' })}, {today.getDate()} {today.getFullYear()}</Button>
             </HeaderDate>
           </Header>
           <Controls>
