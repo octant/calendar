@@ -125,12 +125,14 @@ class Calendar extends Component {
             <WeekDay>Sa</WeekDay>
             {this.state.calendar.map((date, key) => {
               return (
-                <Day
-                  key={key}
-                  inCurrentMonth={date.getMonth() === this.state.currentMonth}
-                  isToday={date.toLocaleDateString() === (new Date()).toLocaleDateString()}>
-                  {date.getDate()}
-                </Day>
+                <Button>
+                  <Day
+                    key={key}
+                    inCurrentMonth={date.getMonth() === this.state.currentMonth}
+                    isToday={date.toLocaleDateString() === (new Date()).toLocaleDateString()}>
+                    {date.getDate()}
+                  </Day>
+                </Button>
               )
             })}
           </CalendarArea>

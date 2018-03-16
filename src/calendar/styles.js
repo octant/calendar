@@ -97,7 +97,10 @@ export const Day = glamorous.div({
   fontSize: '1em'
 }, ({theme, inCurrentMonth, isToday}) => {
   const style = {
-    color: theme.colors.text
+    color: theme.colors.text,
+    ':hover': {
+      backgroundColor: theme.colors.hover
+    }
   }
 
   if (!inCurrentMonth) {
