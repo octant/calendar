@@ -99,7 +99,7 @@ class Calendar extends Component {
             <AmPm>{format(this.state.time, 'A')}</AmPm>
             <HeaderDate>
               <Button onClick={this.handleTodayClick}>
-                {format(this.state.currentDate, 'dddd MMMM, D YYYY')}</Button>
+                {format(this.state.time, 'dddd MMMM, D YYYY')}</Button>
             </HeaderDate>
           </Header>
           <Controls>

@@ -37,7 +37,7 @@ export const Time = glamorous.span({
 export const AmPm = glamorous.span({
   position: 'absolute',
   fontSize: '1.2em',
-  top: '2em'
+  top: '1.9em'
 }, ({theme}) => {
   return {
     color: theme.colors.subtle
