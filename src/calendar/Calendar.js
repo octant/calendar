@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
+import { ThemeProvider } from 'glamorous'
 import Octicon from 'react-octicon'
+
+import theme from './theme'
 
 import {
   currentMonth,
@@ -76,7 +79,6 @@ class Calendar extends Component {
           state.calendar = buildCalendar(currentMonth(newMonth))
           break
         case 'today':
-          console.log('hi')
           newMonth = new Date()
           state.currentDate = newMonth
           state.currentYear = newMonth.getFullYear()
@@ -93,40 +95,42 @@ class Calendar extends Component {
 
   render () {
     return (
-      <Container>
-        <Header>
-          <Time>{this.state.time}</Time>
-          <HeaderDate onClick={this.handleClick('today')}>March, 15 2018</HeaderDate>
-        </Header>
-        <Controls>
-          <YearControl>
-            {this.state.currentDate.toLocaleString('en-us', { month: 'long' })}, {this.state.currentDate.getFullYear()}
-          </YearControl>
-          <MonthControl>
-            <Octicon onClick={this.handleClick('prev')} name='chevron-up' />
-            <Octicon onClick={this.handleClick('next')} name='chevron-down' />
-          </MonthControl>
-        </Controls>
-        <CalendarArea>
-          <WeekDay>Su</WeekDay>
-          <WeekDay>Mo</WeekDay>
-          <WeekDay>Tu</WeekDay>
-          <WeekDay>We</WeekDay>
-          <WeekDay>Th</WeekDay>
-          <WeekDay>Fr</WeekDay>
-          <WeekDay>Sa</WeekDay>
-          {this.state.calendar.map((date, key) => {
-            return (
-              <Day
-                key={key}
-                inCurrentMonth={date.getMonth() === this.state.currentMonth}
-                isToday={date.toLocaleDateString() === (new Date()).toLocaleDateString()}>
-                {date.getDate()}
-              </Day>
-            )
-          })}
-        </CalendarArea>
-      </Container>
+      <ThemeProvider theme={theme}>
+        <Container>
+          <Header>
+            <Time>{this.state.time}</Time>
+            <HeaderDate onClick={this.handleClick('today')}>March, 15 2018</HeaderDate>
+          </Header>
+          <Controls>
+            <YearControl>
+              {this.state.currentDate.toLocaleString('en-us', { month: 'long' })}, {this.state.currentDate.getFullYear()}
+            </YearControl>
+            <MonthControl>
+              <Octicon onClick={this.handleClick('prev')} name='chevron-up' />
+              <Octicon onClick={this.handleClick('next')} name='chevron-down' />
+            </MonthControl>
+          </Controls>
+          <CalendarArea>
+            <WeekDay>Su</WeekDay>
+            <WeekDay>Mo</WeekDay>
+            <WeekDay>Tu</WeekDay>
+            <WeekDay>We</WeekDay>
+            <WeekDay>Th</WeekDay>
+            <WeekDay>Fr</WeekDay>
+            <WeekDay>Sa</WeekDay>
+            {this.state.calendar.map((date, key) => {
+              return (
+                <Day
+                  key={key}
+                  inCurrentMonth={date.getMonth() === this.state.currentMonth}
+                  isToday={date.toLocaleDateString() === (new Date()).toLocaleDateString()}>
+                  {date.getDate()}
+                </Day>
+              )
+            })}
+          </CalendarArea>
+        </Container>
+      </ThemeProvider>
     )
   }
 }

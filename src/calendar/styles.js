@@ -4,9 +4,12 @@ export const Container = glamorous.div({
   position: 'relative',
   height: '28em',
   width: '23em',
-  fontWeight: '400',
-  color: '#CCC',
-  backgroundColor: 'rgba(0, 0, 0, 0.7)'
+  fontWeight: '400'
+}, ({theme}) => {
+  return {
+    color: theme.colors.text,
+    backgroundColor: theme.colors.background
+  }
 })
 
 export const Header = glamorous.div({
@@ -14,8 +17,11 @@ export const Header = glamorous.div({
   top: '0',
   left: '0',
   height: '7em',
-  width: '23em',
-  borderBottom: '#888 0.5px solid'
+  width: '23em'
+}, ({theme}) => {
+  return {
+    borderBottom: `${theme.colors.muted} 0.5px solid`
+  }
 })
 
 export const Time = glamorous.span({
@@ -25,7 +31,6 @@ export const Time = glamorous.span({
   fontWeight: 300,
   paddingTop: '0.2em',
   paddingLeft: '0.5em',
-  color: '#CCC',
   fontSize: '2.8em'
 })
 
@@ -33,9 +38,12 @@ export const HeaderDate = glamorous.span({
   position: 'absolute',
   top: '4.4em',
   left: '1.5em',
-  color: 'rgba(45,137,239, 0.8)',
   ':hover': {
     cursor: 'pointer'
+  }
+}, ({theme}) => {
+  return {
+    color: theme.colors.highlight
   }
 })
 
@@ -78,17 +86,20 @@ export const Day = glamorous.div({
   display: 'inline-block',
   width: '1.5em',
   margin: '0.6em 0.8em',
-  fontSize: '1em',
-  color: '#888'
-}, ({inCurrentMonth, isToday}) => {
-  const style = {}
-  if (inCurrentMonth) {
-    style.color = '#CCC'
+  fontSize: '1em'
+}, ({theme, inCurrentMonth, isToday}) => {
+  const style = {
+    color: theme.colors.text
+  }
+
+  if (!inCurrentMonth) {
+    style.color = theme.colors.muted
   }
 
   if (isToday) {
-    style.backgroundColor = 'rgba(45,137,239, 0.8)'
-    style.color = '#FFF'
+    style.backgroundColor = theme.colors.highlight
+    style.color = theme.colors.highlightedText
   }
+
   return style
 })
