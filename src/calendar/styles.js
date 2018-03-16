@@ -56,7 +56,7 @@ export const Controls = glamorous.div({
   width: '23em'
 })
 
-export const YearControl = glamorous.a({
+export const YearControl = glamorous.div({
   position: 'absolute',
   left: '1.5em',
   lineHeight: '3em'

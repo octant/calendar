@@ -86,6 +86,9 @@ class Calendar extends Component {
           state.currentMonth = newMonth.getMonth()
           state.calendar = buildCalendar(currentMonth(newMonth))
           break
+        case 'select':
+          console.log('selected date')
+          break
         default:
           break
       }
@@ -125,7 +128,7 @@ class Calendar extends Component {
             <WeekDay>Sa</WeekDay>
             {this.state.calendar.map((date, key) => {
               return (
-                <Button>
+                <Button key={key}>
                   <Day
                     key={key}
                     inCurrentMonth={date.getMonth() === this.state.currentMonth}
