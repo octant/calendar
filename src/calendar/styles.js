@@ -109,6 +109,7 @@ export const Day = Control(glamorous.div({
   const style = {
     color: theme.colors.text,
     ':hover': {
+      cursor: 'pointer',
       backgroundColor: theme.colors.hover
     }
   }

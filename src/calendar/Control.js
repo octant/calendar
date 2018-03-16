@@ -6,6 +6,7 @@ const Control = (WrappedComponent) => {
       super(props)
 
       this.handleClick = this.handleClick.bind(this)
+      this.handleMouseOver = this.handleMouseOver.bind(this)
     }
 
     handleClick (e) {
@@ -14,8 +15,19 @@ const Control = (WrappedComponent) => {
         : console.log('add a clickMethod property')
     }
 
+    handleMouseOver (e) {
+      this.props.mouseOveroverMethod
+        ? this.props.clickMethod({...this.props})
+        : console.log('add a mouseOverMethod property')
+    }
+
     render () {
-      return <WrappedComponent onClick={this.handleClick} {...this.props} />
+      return (
+        <WrappedComponent
+          onMouseOver={this.handleMouseOver}
+          onClick={this.handleClick}
+          {...this.props} />
+      )
     }
   }
 }
