@@ -5,6 +5,8 @@ import Octicon from 'react-octicon'
 import theme from './theme'
 
 import {
+  nextMonth,
+  previousMonth,
   currentMonth,
   buildCalendar
 } from '../lib/calendar-fns'
@@ -33,11 +35,13 @@ class Calendar extends Component {
       currentDate: startDate,
       currentYear: startDate.getFullYear(),
       currentMonth: startDate.getMonth(),
-      time: startDate.toLocaleTimeString(),
+      time: startDate,
       calendar: buildCalendar(currentMonth(startDate))
     }
 
-    this.handleClick = this.handleClick.bind(this)
+    this.handleNextClick = this.handleNextClick.bind(this)
+    this.handlePrevClick = this.handlePrevClick.bind(this)
+    this.handleTodayClick = this.handleTodayClick.bind(this)
   }
 
   componentDidMount () {
@@ -54,47 +58,40 @@ class Calendar extends Component {
 
   tick () {
     this.setState({
-      time: new Date().toLocaleTimeString()
+      time: new Date()
     })
   }
 
-  handleClick (command) {
-    return (e) => {
-      e.preventDefault()
-      const state = {}
-      let newMonth
+  handleNextClick () {
+    const state = {}
+    const newMonth = new Date(this.state.currentYear, this.state.currentMonth + 1, 1)
+    state.currentDate = newMonth
+    state.currentYear = newMonth.getFullYear()
+    state.currentMonth = newMonth.getMonth()
+    state.calendar = buildCalendar(nextMonth(this.state.currentDate))
 
-      switch (command) {
-        case 'prev':
-          newMonth = new Date(this.state.currentYear, this.state.currentMonth - 1, 1)
-          state.currentDate = newMonth
-          state.currentYear = newMonth.getFullYear()
-          state.currentMonth = newMonth.getMonth()
-          state.calendar = buildCalendar(currentMonth(newMonth))
-          break
-        case 'next':
-          newMonth = new Date(this.state.currentYear, this.state.currentMonth + 1, 1)
-          state.currentDate = newMonth
-          state.currentYear = newMonth.getFullYear()
-          state.currentMonth = newMonth.getMonth()
-          state.calendar = buildCalendar(currentMonth(newMonth))
-          break
-        case 'today':
-          newMonth = new Date()
-          state.currentDate = newMonth
-          state.currentYear = newMonth.getFullYear()
-          state.currentMonth = newMonth.getMonth()
-          state.calendar = buildCalendar(currentMonth(newMonth))
-          break
-        case 'select':
-          console.log('selected date')
-          break
-        default:
-          break
-      }
+    this.setState({...state})
+  }
 
-      this.setState({...state})
-    }
+  handlePrevClick () {
+    const state = {}
+    const newMonth = new Date(this.state.currentYear, this.state.currentMonth - 1, 1)
+    state.currentDate = newMonth
+    state.currentYear = newMonth.getFullYear()
+    state.currentMonth = newMonth.getMonth()
+    state.calendar = buildCalendar(previousMonth(this.state.currentDate))
+
+    this.setState({...state})
+  }
+
+  handleTodayClick () {
+    const state = {}
+    const newMonth = new Date()
+    state.currentDate = newMonth
+    state.currentYear = newMonth.getFullYear()
+    state.currentMonth = newMonth.getMonth()
+    state.calendar = buildCalendar(currentMonth(newMonth))
+    this.setState({...state})
   }
 
   render () {
@@ -103,9 +100,9 @@ class Calendar extends Component {
       <ThemeProvider theme={theme}>
         <Container>
           <Header>
-            <Time>{this.state.time}</Time>
+            <Time>{this.state.time.toLocaleTimeString()}</Time>
             <HeaderDate>
-              <Button onClick={this.handleClick('today')}>
+              <Button onClick={this.handleTodayClick}>
                 {today.toLocaleString('en-us', { month: 'long' })}, {today.getDate()} {today.getFullYear()}</Button>
             </HeaderDate>
           </Header>
@@ -116,8 +113,8 @@ class Calendar extends Component {
               </Button>
             </YearControl>
             <MonthControl>
-              <Button onClick={this.handleClick('prev')}><Octicon name='chevron-up' /></Button>
-              <Button onClick={this.handleClick('next')}><Octicon name='chevron-down' /></Button>
+              <Button onClick={this.handlePrevClick}><Octicon name='chevron-up' /></Button>
+              <Button onClick={this.handleNextClick}><Octicon name='chevron-down' /></Button>
             </MonthControl>
           </Controls>
           <CalendarArea>
