@@ -5,7 +5,6 @@ export const Container = glamorous.div({
   margin: 'auto',
   height: '28em',
   width: '23em',
-  fontWeight: '400'
 }, ({theme}) => {
   return {
     color: theme.colors.text,
@@ -33,6 +32,16 @@ export const Time = glamorous.span({
   paddingTop: '0.2em',
   paddingLeft: '0.5em',
   fontSize: '2.8em'
+})
+
+export const AmPm = glamorous.span({
+  position: 'absolute',
+  fontSize: '1.2em',
+  top: '2em'
+}, ({theme}) => {
+  return {
+    color: theme.colors.subtle
+  }
 })
 
 export const HeaderDate = glamorous.span({

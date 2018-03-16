@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { ThemeProvider } from 'glamorous'
 import Octicon from 'react-octicon'
+import format from 'date-fns/format'
 
 import theme from './theme'
 
@@ -15,6 +16,7 @@ import {
   Container,
   Header,
   Time,
+  AmPm,
   HeaderDate,
   Controls,
   YearControl,
@@ -89,21 +91,21 @@ class Calendar extends Component {
   }
 
   render () {
-    const today = new Date()
     return (
       <ThemeProvider theme={theme}>
         <Container>
           <Header>
-            <Time>{this.state.time.toLocaleTimeString()}</Time>
+            <Time>{format(this.state.time, 'h:mm:ss')}</Time>
+            <AmPm>{format(this.state.time, 'A')}</AmPm>
             <HeaderDate>
               <Button onClick={this.handleTodayClick}>
-                {today.toLocaleString('en-us', { month: 'long' })}, {today.getDate()} {today.getFullYear()}</Button>
+                {format(this.state.currentDate, 'dddd MMMM, D YYYY')}</Button>
             </HeaderDate>
           </Header>
           <Controls>
             <YearControl>
               <Button>
-                {this.state.currentDate.toLocaleString('en-us', { month: 'long' })}, {this.state.currentDate.getFullYear()}
+                {format(this.state.currentDate, 'MMMM YYYY')}
               </Button>
             </YearControl>
             <MonthControl>

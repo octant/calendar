@@ -5,7 +5,8 @@ const main = {
     highlight: 'rgba(45, 137, 239, 0.8)',
     highlightedText: '#FFF',
     hover: 'rgba(0, 0, 0, 0.5)',
-    text: '#CCC',
+    text: '#EEE',
+    subtle: '#AAA',
     muted: '#888'
   }
 }
