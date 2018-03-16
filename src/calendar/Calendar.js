@@ -95,7 +95,7 @@ class Calendar extends Component {
       <ThemeProvider theme={theme}>
         <Container>
           <Header>
-            <Time>{format(this.state.time, 'h:mm:ss')}</Time>
+            <Time>{format(this.state.time, 'H:mm:ss')}</Time>
             <AmPm>{format(this.state.time, 'A')}</AmPm>
             <HeaderDate>
               <Button onClick={this.handleTodayClick}>
@@ -125,7 +125,8 @@ class Calendar extends Component {
               return (
                 <Button key={key}>
                   <Day
-                    key={key}
+                    date={date}
+                    clickMethod={({date}) => { console.log(date) }}
                     inCurrentMonth={date.getMonth() === this.state.currentDate.getMonth()}
                     isToday={date.toLocaleDateString() === (new Date()).toLocaleDateString()}>
                     {date.getDate()}

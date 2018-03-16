@@ -1,10 +1,11 @@
 import glamorous from 'glamorous'
+import Control from './Control'
 
 export const Container = glamorous.div({
   position: 'relative',
   margin: 'auto',
   height: '28em',
-  width: '23em',
+  width: '23em'
 }, ({theme}) => {
   return {
     color: theme.colors.text,
@@ -99,7 +100,7 @@ export const WeekDay = glamorous.div({
   fontSize: '0.8em'
 })
 
-export const Day = glamorous.div({
+export const Day = Control(glamorous.div({
   display: 'inline-block',
   width: '1.5em',
   margin: '0.6em 0.8em',
@@ -122,4 +123,4 @@ export const Day = glamorous.div({
   }
 
   return style
-})
+}))
