@@ -1,11 +1,11 @@
 import glamorous from 'glamorous'
-import Control from './Control'
+import Control from '../lib/Control'
 
 export const Container = glamorous.div({
   position: 'relative',
   margin: 'auto',
-  height: '28em',
-  width: '23em'
+  height: '30em',
+  width: '20.25em'
 }, ({theme}) => {
   return {
     color: theme.colors.text,
@@ -18,7 +18,7 @@ export const Header = glamorous.div({
   top: '0',
   left: '0',
   height: '7em',
-  width: '23em'
+  width: '20.25em'
 }, ({theme}) => {
   return {
     borderBottom: `${theme.colors.muted} 0.5px solid`
@@ -38,6 +38,7 @@ export const Time = glamorous.span({
 export const AmPm = glamorous.span({
   position: 'absolute',
   fontSize: '1.2em',
+  marginLeft: '1em',
   top: '1.9em'
 }, ({theme}) => {
   return {
@@ -54,7 +55,7 @@ export const HeaderDate = glamorous.span({
   }
 }, ({theme}) => {
   return {
-    color: theme.colors.highlight
+    color: theme.colors.highlightedText
   }
 })
 
@@ -63,7 +64,7 @@ export const Controls = glamorous.div({
   top: '7em',
   left: 0,
   height: '3em',
-  width: '23em'
+  width: '20.25em'
 })
 
 export const YearControl = glamorous.div({
@@ -81,23 +82,21 @@ export const Button = glamorous.a({
 
 export const MonthControl = glamorous.div({
   position: 'absolute',
-  left: '19.5em',
+  left: '16.75em',
   lineHeight: '3em'
 })
 
 export const CalendarArea = glamorous.div({
   position: 'absolute',
+  padding: '0.5em',
   top: '10em',
   left: 0,
-  height: '18em',
-  width: '23em'
+  width: '20.25em'
 })
 
 export const WeekDay = glamorous.div({
-  display: 'inline-block',
-  width: '2em',
-  margin: '0 0.9em 0.5em 0.9em',
-  fontSize: '0.8em'
+  float: 'left',
+  width: '2.75em'
 })
 
 export const Day = Control(glamorous.div({

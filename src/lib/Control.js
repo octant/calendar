@@ -10,15 +10,15 @@ const Control = (WrappedComponent) => {
     }
 
     handleClick (e) {
-      this.props.clickMethod
-        ? this.props.clickMethod({...this.props})
-        : console.log('add a clickMethod property')
+      if (this.props.clickMethod) {
+        this.props.clickMethod({...this.props})
+      }
     }
 
     handleMouseOver (e) {
-      this.props.mouseOveroverMethod
-        ? this.props.clickMethod({...this.props})
-        : console.log('add a mouseOverMethod property')
+      if (this.props.mouseOveroverMethod) {
+        this.props.clickMethod({...this.props})
+      }
     }
 
     render () {

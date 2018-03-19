@@ -23,9 +23,11 @@ import {
   MonthControl,
   CalendarArea,
   WeekDay,
-  Day,
+  // Day,
   Button
 } from './styles'
+
+import Day from './day'
 
 class Calendar extends Component {
   constructor (props) {
