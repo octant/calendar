@@ -41,7 +41,7 @@ export const DayContainer = Control(glamorous.div({
   width: `2.75em`,
   height: `2.75em`,
   margin: `0.125em 0`
-}, ({theme, isToday, inRange, rangeStart, rangeEnd}) => {
+}, ({theme, isToday, isSelected, inRange, rangeStart, rangeEnd}) => {
   const style = {
     color: theme.colors.text,
     ':hover': {
@@ -54,6 +54,10 @@ export const DayContainer = Control(glamorous.div({
   }
 
   if (inRange) {
+    style.backgroundColor = theme.colors.highlight
+  }
+
+  if (isSelected) {
     style.backgroundColor = theme.colors.highlight
   }
 

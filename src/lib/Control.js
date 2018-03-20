@@ -16,8 +16,8 @@ const Control = (WrappedComponent) => {
     }
 
     handleMouseOver (e) {
-      if (this.props.mouseOveroverMethod) {
-        this.props.clickMethod({...this.props})
+      if (this.props.mouseOverMethod) {
+        this.props.mouseOverMethod({...this.props})
       }
     }
 

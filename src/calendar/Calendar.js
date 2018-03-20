@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { ThemeProvider } from 'glamorous'
 import Octicon from 'react-octicon'
 import format from 'date-fns/format'
@@ -38,9 +39,12 @@ class Calendar extends Component {
     this.state = {
       currentDate: startDate,
       time: startDate,
-      calendar: buildCalendar(currentMonth(startDate))
+      calendar: buildCalendar(currentMonth(startDate)),
+      selectionStarted: false
     }
 
+    this.handleDayClick = this.handleDayClick.bind(this)
+    this.handleDayHover = this.handleDayHover.bind(this)
     this.handleNextClick = this.handleNextClick.bind(this)
     this.handlePrevClick = this.handlePrevClick.bind(this)
     this.handleTodayClick = this.handleTodayClick.bind(this)
@@ -58,10 +62,63 @@ class Calendar extends Component {
     clearInterval(this.state.intervalID)
   }
 
+  getChildContext () {
+    return {
+      selectionStarted: this.state.selectionStarted,
+      startDate: parseInt(this.state.startDate, 10),
+      endDate: parseInt(this.state.endDate, 10),
+      selected: parseInt(this.state.selected, 10),
+      underMouse: parseInt(this.state.underMouse, 10)
+    }
+  }
+
   tick () {
     this.setState({
       time: new Date()
     })
+  }
+
+  handleDayClick ({id}) {
+    const state = {}
+
+    if (this.props.multiSelect) {
+      if (!this.state.startDate && !this.state.endDate) {
+        console.log('started')
+        state.startDate = id
+        state.selectionStarted = true
+      } else if (this.state.startDate && this.state.endDate) {
+        console.log('cleared')
+        state.endDate = undefined
+        state.startDate = undefined
+        state.selectionStarted = false
+      } else if (this.state.startDate && this.state.selectionStarted) {
+        console.log('ended')
+        state.endDate = id
+        state.selectionStarted = false
+      }
+    } else {
+      state.selected = id
+    }
+
+    this.setState(state)
+  }
+
+  handleDayHover ({id}) {
+    const state = {}
+
+    if (this.state.selectionStarted && id < this.state.startDate - 1) {
+      console.log('lower')
+      state.endDate = this.state.startDate
+      state.startDate = this.state.endDate
+    }
+
+    if (this.state.selectionStarted && id > this.state.endDate) {
+      console.log('higher')
+      state.startDate = this.state.endDate
+      state.endDate = this.state.startDate
+    }
+
+    this.setState({...state, underMouse: id})
   }
 
   handleNextClick () {
@@ -128,7 +185,9 @@ class Calendar extends Component {
                 <Day
                   key={key}
                   date={date}
-                  clickMethod={({date}) => { console.log(date) }}
+                  id={format(date, 'YYYYMMDD')}
+                  clickMethod={this.handleDayClick}
+                  mouseOverMethod={this.handleDayHover}
                   inCurrentMonth={date.getMonth() === this.state.currentDate.getMonth()}
                   isToday={date.toLocaleDateString() === (new Date()).toLocaleDateString()}>
                   {date.getDate()}
@@ -140,6 +199,14 @@ class Calendar extends Component {
       </ThemeProvider>
     )
   }
+}
+
+Calendar.childContextTypes = {
+  selectionStarted: PropTypes.bool,
+  startDate: PropTypes.number,
+  endDate: PropTypes.number,
+  selected: PropTypes.number,
+  underMouse: PropTypes.number
 }
 
 export default Calendar
