@@ -9,7 +9,7 @@ class App extends Component {
       <div className='App'>
         <h1>Calendar</h1>
         <div className='App-content'>
-          <Calendar multiSelect />
+          <Calendar />
         </div>
       </div>
     )

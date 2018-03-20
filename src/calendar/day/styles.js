@@ -49,16 +49,16 @@ export const DayContainer = Control(glamorous.div({
     }
   }
 
-  if (isToday) {
-    style.backgroundColor = theme.colors.highlight
-  }
-
   if (inRange) {
     style.backgroundColor = theme.colors.highlight
   }
 
+  if (isToday) {
+    style.backgroundColor = theme.colors.muted
+  }
+
   if (isSelected) {
-    style.backgroundColor = theme.colors.highlight
+    style.backgroundColor = theme.colors.highlightDark
   }
 
   if (rangeStart) {

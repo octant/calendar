@@ -60,7 +60,7 @@ Wrapper.contextTypes = {
   selectionStarted: PropTypes.bool,
   endDate: PropTypes.string,
   startDate: PropTypes.string,
-  selected: PropTypes.number
+  selected: PropTypes.string
 }
 
 export default Wrapper

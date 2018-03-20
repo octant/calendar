@@ -131,7 +131,8 @@ class Calendar extends Component {
       state.endDate = undefined
     }
 
-    this.setState({...state, underMouse: id})
+    state.underMouse = this.props.multiSelect ? id : undefined
+    this.setState({...state})
   }
 
   handleNextClick () {
@@ -216,7 +217,7 @@ Calendar.childContextTypes = {
   currentDate: PropTypes.instanceOf(Date),
   startDate: PropTypes.string,
   endDate: PropTypes.string,
-  selected: PropTypes.number
+  selected: PropTypes.string
 }
 
 export default Calendar
