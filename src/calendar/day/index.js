@@ -16,22 +16,23 @@ class Wrapper extends React.Component {
   }
 
   isSelected () {
-    return parseInt(this.props.id, 10) === this.context.selected
+    return this.props.id === this.context.selected
   }
 
   inRange () {
     const {startDate, endDate} = this.context
-    const id = parseInt(this.props.id, 10)
+    const id = this.props.id
 
     return (id > startDate) && (id < endDate)
   }
 
   rangeStart () {
-    return this.context.startDate === parseInt(this.props.id, 10)
+    return this.context.startDate === this.props.id
   }
 
   rangeEnd () {
-    return this.context.endDate === parseInt(this.props.id, 10)
+    const {endDate, startDate} = this.context
+    return endDate === this.props.id && endDate !== startDate
   }
 
   render () {
@@ -56,12 +57,10 @@ class Wrapper extends React.Component {
 
 Wrapper.contextTypes = {
   currentDate: PropTypes.instanceOf(Date),
-  selectionState: PropTypes.string,
   selectionStarted: PropTypes.bool,
-  startDate: PropTypes.number,
-  endDate: PropTypes.number,
-  selected: PropTypes.number,
-  underMouse: PropTypes.number
+  endDate: PropTypes.string,
+  startDate: PropTypes.string,
+  selected: PropTypes.number
 }
 
 export default Wrapper

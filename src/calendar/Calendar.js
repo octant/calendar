@@ -83,11 +83,9 @@ class Calendar extends Component {
   getChildContext () {
     return {
       currentDate: this.state.currentDate,
-      selectionState: this.getCurrentSelectionState(),
-      startDate: parseInt(this.state.startDate, 10),
-      endDate: parseInt(this.state.endDate, 10),
-      selected: parseInt(this.state.selected, 10),
-      underMouse: parseInt(this.state.underMouse, 10)
+      endDate: this.state.endDate || this.state.underMouse,
+      startDate: this.state.startDate || this.state.underMouse,
+      selected: this.state.selected
     }
   }
 
@@ -104,7 +102,8 @@ class Calendar extends Component {
       if (this.isCurrentSelectionState('initial')) {
         state.startDate = id
       } else if (this.isCurrentSelectionState('started')) {
-        state.endDate = id
+        state.endDate = this.state.endDate || id
+        state.startDate = this.state.startDate || id
       } else if (this.isCurrentSelectionState('completed')) {
         state.endDate = undefined
         state.startDate = undefined
@@ -123,27 +122,14 @@ class Calendar extends Component {
 
     if (this.isCurrentSelectionState('started') && id < this.state.startDate) {
       state.endDate = this.state.startDate
-      state.startDate = id
+      state.startDate = undefined
       console.log('lower')
     }
 
     if (this.isCurrentSelectionState('started') && id > this.state.endDate) {
       state.startDate = this.state.endDate
-      state.endDate = id
-      console.log(id)
-      console.log('higher')
+      state.endDate = undefined
     }
-    // if (this.state.selectionStarted && id < this.state.startDate - 1) {
-    //   console.log('lower')
-    //   state.endDate = this.state.startDate
-    //   state.startDate = this.state.endDate
-    // }
-
-    // if (this.state.selectionStarted && id > this.state.endDate) {
-    //   console.log('higher')
-    //   state.startDate = this.state.endDate
-    //   state.endDate = this.state.startDate
-    // }
 
     this.setState({...state, underMouse: id})
   }
@@ -228,11 +214,9 @@ class Calendar extends Component {
 
 Calendar.childContextTypes = {
   currentDate: PropTypes.instanceOf(Date),
-  selectionState: PropTypes.string,
-  startDate: PropTypes.number,
-  endDate: PropTypes.number,
-  selected: PropTypes.number,
-  underMouse: PropTypes.number
+  startDate: PropTypes.string,
+  endDate: PropTypes.string,
+  selected: PropTypes.number
 }
 
 export default Calendar
