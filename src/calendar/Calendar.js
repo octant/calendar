@@ -64,6 +64,7 @@ class Calendar extends Component {
 
   getChildContext () {
     return {
+      currentDate: this.state.currentDate,
       selectionStarted: this.state.selectionStarted,
       startDate: parseInt(this.state.startDate, 10),
       endDate: parseInt(this.state.endDate, 10),
@@ -187,9 +188,7 @@ class Calendar extends Component {
                   date={date}
                   id={format(date, 'YYYYMMDD')}
                   clickMethod={this.handleDayClick}
-                  mouseOverMethod={this.handleDayHover}
-                  inCurrentMonth={date.getMonth() === this.state.currentDate.getMonth()}
-                  isToday={date.toLocaleDateString() === (new Date()).toLocaleDateString()}>
+                  mouseOverMethod={this.handleDayHover}>
                   {date.getDate()}
                 </Day>
               )
@@ -202,6 +201,7 @@ class Calendar extends Component {
 }
 
 Calendar.childContextTypes = {
+  currentDate: PropTypes.date,
   selectionStarted: PropTypes.bool,
   startDate: PropTypes.number,
   endDate: PropTypes.number,

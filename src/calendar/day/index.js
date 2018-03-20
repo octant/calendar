@@ -7,6 +7,14 @@ import {
 } from './styles'
 
 class Wrapper extends React.Component {
+  isToday () {
+    return this.props.date.toLocaleDateString() === (new Date()).toLocaleDateString()
+  }
+
+  inMonth () {
+    return this.props.date.getMonth() === this.context.currentDate.getMonth()
+  }
+
   isSelected () {
     return parseInt(this.props.id, 10) === this.context.selected
   }
@@ -29,21 +37,24 @@ class Wrapper extends React.Component {
   render () {
     return (
       <DayContainer
+        isToday={this.isToday()}
         isSelected={this.isSelected()}
         inRange={this.inRange()}
         rangeStart={this.rangeStart()}
-        rangeEnd={this.rangeEnd()}
-        {...this.props}>
+        rangeEnd={this.rangeEnd()}>
         <Day
+          isToday={this.isToday()}
+          inMonth={this.inMonth()}
           rangeStart={this.rangeStart()}
-          rangeEnd={this.rangeEnd()}
-          {...this.props}>{this.props.children}</Day>
+          rangeEnd={this.rangeEnd()}>
+          {this.props.children}</Day>
       </DayContainer>
     )
   }
 }
 
 Wrapper.contextTypes = {
+  currentDate: PropTypes.date,
   selectionStarted: PropTypes.bool,
   startDate: PropTypes.number,
   endDate: PropTypes.number,

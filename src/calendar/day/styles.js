@@ -7,7 +7,7 @@ export const Day = glamorous.div({
   width: `2.5em`,
   margin: `0.125em`,
   lineHeight: `2.25em`
-}, ({theme, inCurrentMonth, isToday, rangeStart, rangeEnd}) => {
+}, ({theme, inMonth, isToday, rangeStart, rangeEnd}) => {
   const style = {
     color: theme.colors.text,
     ':hover': {
@@ -15,7 +15,7 @@ export const Day = glamorous.div({
     }
   }
 
-  if (!inCurrentMonth) {
+  if (!inMonth) {
     style.color = theme.colors.muted
   }
 
