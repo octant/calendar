@@ -40,7 +40,13 @@ class Calendar extends Component {
       currentDate: startDate,
       time: startDate,
       calendar: buildCalendar(currentMonth(startDate)),
-      selectionStarted: false
+      selectionStarted: false,
+      selectionState: 0,
+      selectionStates: [
+        'initial',
+        'started',
+        'completed'
+      ]
     }
 
     this.handleDayClick = this.handleDayClick.bind(this)
@@ -62,10 +68,22 @@ class Calendar extends Component {
     clearInterval(this.state.intervalID)
   }
 
+  isCurrentSelectionState (state) {
+    return this.state.selectionStates[this.state.selectionState] === state
+  }
+
+  getCurrentSelectionState () {
+    return this.state.selectionStates[this.state.selectionState]
+  }
+
+  getNextClickState () {
+    return (this.state.selectionState + 1) % this.state.selectionStates.length
+  }
+
   getChildContext () {
     return {
       currentDate: this.state.currentDate,
-      selectionStarted: this.state.selectionStarted,
+      selectionState: this.getCurrentSelectionState(),
       startDate: parseInt(this.state.startDate, 10),
       endDate: parseInt(this.state.endDate, 10),
       selected: parseInt(this.state.selected, 10),
@@ -83,20 +101,16 @@ class Calendar extends Component {
     const state = {}
 
     if (this.props.multiSelect) {
-      if (!this.state.startDate && !this.state.endDate) {
-        console.log('started')
+      if (this.isCurrentSelectionState('initial')) {
         state.startDate = id
-        state.selectionStarted = true
-      } else if (this.state.startDate && this.state.endDate) {
-        console.log('cleared')
+      } else if (this.isCurrentSelectionState('started')) {
+        state.endDate = id
+      } else if (this.isCurrentSelectionState('completed')) {
         state.endDate = undefined
         state.startDate = undefined
-        state.selectionStarted = false
-      } else if (this.state.startDate && this.state.selectionStarted) {
-        console.log('ended')
-        state.endDate = id
-        state.selectionStarted = false
       }
+
+      state.selectionState = this.getNextClickState()
     } else {
       state.selected = id
     }
@@ -107,17 +121,29 @@ class Calendar extends Component {
   handleDayHover ({id}) {
     const state = {}
 
-    if (this.state.selectionStarted && id < this.state.startDate - 1) {
-      console.log('lower')
+    if (this.isCurrentSelectionState('started') && id < this.state.startDate) {
       state.endDate = this.state.startDate
-      state.startDate = this.state.endDate
+      state.startDate = id
+      console.log('lower')
     }
 
-    if (this.state.selectionStarted && id > this.state.endDate) {
-      console.log('higher')
+    if (this.isCurrentSelectionState('started') && id > this.state.endDate) {
       state.startDate = this.state.endDate
-      state.endDate = this.state.startDate
+      state.endDate = id
+      console.log(id)
+      console.log('higher')
     }
+    // if (this.state.selectionStarted && id < this.state.startDate - 1) {
+    //   console.log('lower')
+    //   state.endDate = this.state.startDate
+    //   state.startDate = this.state.endDate
+    // }
+
+    // if (this.state.selectionStarted && id > this.state.endDate) {
+    //   console.log('higher')
+    //   state.startDate = this.state.endDate
+    //   state.endDate = this.state.startDate
+    // }
 
     this.setState({...state, underMouse: id})
   }
@@ -201,8 +227,8 @@ class Calendar extends Component {
 }
 
 Calendar.childContextTypes = {
-  currentDate: PropTypes.date,
-  selectionStarted: PropTypes.bool,
+  currentDate: PropTypes.instanceOf(Date),
+  selectionState: PropTypes.string,
   startDate: PropTypes.number,
   endDate: PropTypes.number,
   selected: PropTypes.number,

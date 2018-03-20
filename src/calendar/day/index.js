@@ -56,6 +56,7 @@ class Wrapper extends React.Component {
 
 Wrapper.contextTypes = {
   currentDate: PropTypes.instanceOf(Date),
+  selectionState: PropTypes.string,
   selectionStarted: PropTypes.bool,
   startDate: PropTypes.number,
   endDate: PropTypes.number,
