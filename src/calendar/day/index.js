@@ -41,7 +41,8 @@ class Wrapper extends React.Component {
         isSelected={this.isSelected()}
         inRange={this.inRange()}
         rangeStart={this.rangeStart()}
-        rangeEnd={this.rangeEnd()}>
+        rangeEnd={this.rangeEnd()}
+        {...this.props}>
         <Day
           isToday={this.isToday()}
           inMonth={this.inMonth()}
@@ -54,7 +55,7 @@ class Wrapper extends React.Component {
 }
 
 Wrapper.contextTypes = {
-  currentDate: PropTypes.date,
+  currentDate: PropTypes.instanceOf(Date),
   selectionStarted: PropTypes.bool,
   startDate: PropTypes.number,
   endDate: PropTypes.number,
