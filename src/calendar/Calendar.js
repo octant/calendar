@@ -201,7 +201,7 @@ class Calendar extends Component {
                 <Day
                   key={key}
                   date={date}
-                  id={format(date, 'YYYYMMDD')}
+                  id={format(date, 'YYYY-MM-DD')}
                   clickMethod={this.handleDayClick}
                   mouseOverMethod={this.handleDayHover}>
                   {date.getDate()}
