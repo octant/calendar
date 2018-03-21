@@ -52,7 +52,8 @@ class Wrapper extends React.Component {
         inRange={this.inRange()}
         rangeStart={this.rangeStart()}
         rangeEnd={this.rangeEnd()}
-        {...this.props}>
+        onMouseOver={this.props.onMouseOver}
+        onClick={this.props.onClick}>
         <Day
           isToday={this.isToday()}
           inMonth={this.inMonth()}
