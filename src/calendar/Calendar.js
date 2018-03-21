@@ -98,7 +98,7 @@ class Calendar extends Component {
     const {startDate, endDate} = this.state
     const state = {}
 
-    if (this.props.multiSelect) {
+    if (this.props.rangeSelect) {
       if (this.isCurrentSelectionState('initial')) {
         state.startDate = id
         state.selectionState = this.getNextSelectionState()
@@ -133,7 +133,7 @@ class Calendar extends Component {
       state.endDate = undefined
     }
 
-    state.underMouse = this.props.multiSelect ? id : undefined
+    state.underMouse = this.props.rangeSelect ? id : undefined
     this.setState(state)
   }
 
