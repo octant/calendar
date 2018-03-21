@@ -95,20 +95,24 @@ class Calendar extends Component {
   }
 
   handleDayClick ({id}) {
+    const {startDate, endDate} = this.state
     const state = {}
 
     if (this.props.multiSelect) {
       if (this.isCurrentSelectionState('initial')) {
         state.startDate = id
+        state.selectionState = this.getNextSelectionState()
       } else if (this.isCurrentSelectionState('started')) {
-        state.endDate = this.state.endDate || id
-        state.startDate = this.state.startDate || id
+        state.endDate = endDate || id
+        state.startDate = startDate || id
+        state.selectionState = state.endDate === state.startDate
+          ? this.state.selectionState
+          : this.getNextSelectionState()
       } else if (this.isCurrentSelectionState('completed')) {
         state.endDate = undefined
         state.startDate = undefined
+        state.selectionState = this.getNextSelectionState()
       }
-
-      state.selectionState = this.getNextSelectionState()
     } else {
       state.selected = id
     }
