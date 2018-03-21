@@ -34,11 +34,13 @@ class Calendar extends Component {
   constructor (props) {
     super(props)
 
-    const startDate = this.props.defaultDate || new Date()
-
+    const startDate = props.date || new Date()
+    console.log(typeof props.date)
+    console.log(props.date)
     this.state = {
       currentDate: startDate,
-      time: startDate,
+      time: new Date(),
+      selected: format(props.date, 'YYYY-MM-DD'),
       calendar: buildCalendar(currentMonth(startDate)),
       selectionState: 0,
       selectionStates: [
@@ -67,6 +69,12 @@ class Calendar extends Component {
     clearInterval(this.state.intervalID)
   }
 
+  tick () {
+    this.setState({
+      time: new Date()
+    })
+  }
+
   isCurrentSelectionState (state) {
     return this.getCurrentSelectionState() === state
   }
@@ -86,12 +94,6 @@ class Calendar extends Component {
       startDate: this.state.startDate || this.state.underMouse,
       selected: this.state.selected
     }
-  }
-
-  tick () {
-    this.setState({
-      time: new Date()
-    })
   }
 
   handleDayClick ({id}) {
