@@ -40,7 +40,6 @@ class Calendar extends Component {
       currentDate: startDate,
       time: startDate,
       calendar: buildCalendar(currentMonth(startDate)),
-      selectionStarted: false,
       selectionState: 0,
       selectionStates: [
         'initial',
@@ -69,14 +68,14 @@ class Calendar extends Component {
   }
 
   isCurrentSelectionState (state) {
-    return this.state.selectionStates[this.state.selectionState] === state
+    return this.getCurrentSelectionState() === state
   }
 
   getCurrentSelectionState () {
     return this.state.selectionStates[this.state.selectionState]
   }
 
-  getNextClickState () {
+  getNextSelectionState () {
     return (this.state.selectionState + 1) % this.state.selectionStates.length
   }
 
@@ -109,7 +108,7 @@ class Calendar extends Component {
         state.startDate = undefined
       }
 
-      state.selectionState = this.getNextClickState()
+      state.selectionState = this.getNextSelectionState()
     } else {
       state.selected = id
     }
