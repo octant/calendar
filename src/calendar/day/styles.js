@@ -25,10 +25,12 @@ export const Day = glamorous.div({
   }
 
   if (rangeStart) {
+    style.backgroundColor = theme.colors.highlightDark
     style.borderRadius = `1.25em 0 0 1.25em`
   }
 
   if (rangeEnd) {
+    style.backgroundColor = theme.colors.highlightDark
     style.borderRadius = `0 1.25em 1.25em 0`
   }
 
