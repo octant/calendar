@@ -220,11 +220,10 @@ class Calendar extends Component {
 
 Calendar.propTypes = {
   date: PropTypes.string,
-  selected: (props, propName, componentName) => {
-    if (!(props.date || props.selected || props.rangeSelect || props.startDate || props.endDate)) {
-      return new Error('Cannont use "selected" with a range selection')
-    }
-  }
+  selected: PropTypes.string,
+  rangeSelect: PropTypes.bool,
+  startDate: PropTypes.string,
+  endDate: PropTypes.string
 }
 
 Calendar.childContextTypes = {
