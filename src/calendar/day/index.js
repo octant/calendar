@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Control from '../../lib/Control'
 
 import {
   Day,
@@ -7,6 +8,14 @@ import {
 } from './styles'
 
 class Wrapper extends React.Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      id: parseInt(props.id, 10)
+    }
+  }
+
   isToday () {
     return this.props.date.toLocaleDateString() === (new Date()).toLocaleDateString()
   }
@@ -63,4 +72,4 @@ Wrapper.contextTypes = {
   selected: PropTypes.string
 }
 
-export default Wrapper
+export default Control(Wrapper)

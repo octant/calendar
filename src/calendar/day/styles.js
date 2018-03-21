@@ -1,5 +1,4 @@
 import glamorous from 'glamorous'
-import Control from '../../lib/Control'
 
 export const Day = glamorous.div({
   position: `relative`,
@@ -37,7 +36,7 @@ export const Day = glamorous.div({
   return style
 })
 
-export const DayContainer = Control(glamorous.div({
+export const DayContainer = glamorous.div({
   position: `relative`,
   float: `left`,
   width: `2.75em`,
@@ -74,4 +73,4 @@ export const DayContainer = Control(glamorous.div({
   }
 
   return style
-}))
+})
