@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Control from '../../lib/Control'
+import ButtonControl from '../../lib/button-control'
 
 import {
   Day,
@@ -73,4 +73,4 @@ Wrapper.contextTypes = {
   selected: PropTypes.string
 }
 
-export default Control(Wrapper)
+export default ButtonControl(Wrapper)

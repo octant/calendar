@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Control = (WrappedComponent) => {
+const ButtonControl = (WrappedComponent) => {
   return class extends React.Component {
     constructor (props) {
       super(props)
@@ -32,4 +32,4 @@ const Control = (WrappedComponent) => {
   }
 }
 
-export default Control
+export default ButtonControl
