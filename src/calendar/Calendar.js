@@ -167,7 +167,7 @@ class Calendar extends Component {
       <ThemeProvider theme={theme}>
         <Container>
           <Header>
-            <Time>{format(this.state.time, 'H:mm:ss')}</Time>
+            <Time>{format(this.state.time, 'hh:mm:ss')}</Time>
             <AmPm>{format(this.state.time, 'A')}</AmPm>
             <HeaderDate>
               <Button onClick={this.handleTodayClick}>
