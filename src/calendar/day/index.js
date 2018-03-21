@@ -58,6 +58,7 @@ class Wrapper extends React.Component {
           isToday={this.isToday()}
           inMonth={this.inMonth()}
           isSelected={this.isSelected()}
+          inRange={this.inRange()}
           rangeStart={this.rangeStart()}
           rangeEnd={this.rangeEnd()}>
           {this.props.children}</Day>

@@ -6,7 +6,7 @@ export const Day = glamorous.div({
   width: `2.5em`,
   margin: `0.125em`,
   lineHeight: `2.25em`
-}, ({theme, inMonth, isToday, isSelected, rangeStart, rangeEnd}) => {
+}, ({theme, inMonth, isToday, isSelected, rangeStart, inRange, rangeEnd}) => {
   const style = {
     color: theme.colors.text,
     ':hover': {
@@ -28,12 +28,18 @@ export const Day = glamorous.div({
     style.color = theme.colors.emphasizedText
   }
 
+  if (inRange) {
+    style.color = theme.colors.emphasizedText
+  }
+
   if (rangeStart) {
+    style.color = theme.colors.emphasizedText
     style.backgroundColor = theme.colors.highlightDark
     style.borderRadius = `1.25em 0 0 1.25em`
   }
 
   if (rangeEnd) {
+    style.color = theme.colors.emphasizedText
     style.backgroundColor = theme.colors.highlightDark
     style.borderRadius = `0 1.25em 1.25em 0`
   }

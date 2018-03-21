@@ -9,7 +9,7 @@ class App extends Component {
       <div className='App'>
         <h1>Calendar</h1>
         <div className='App-content'>
-          <Calendar date={new Date(2017, 11, 31)} />
+          <Calendar date='2018-02-22' />
         </div>
       </div>
     )

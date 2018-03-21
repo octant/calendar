@@ -34,20 +34,21 @@ class Calendar extends Component {
   constructor (props) {
     super(props)
 
-    const startDate = props.date || new Date()
-    console.log(typeof props.date)
-    console.log(props.date)
+    const startDate = props.date || props.startDate || props.endDate || format(new Date(), 'YYYY-MM-DD')
+    const currentDate = new Date(startDate.split('-'))
+
     this.state = {
-      currentDate: startDate,
+      currentDate,
       time: new Date(),
-      selected: format(props.date, 'YYYY-MM-DD'),
-      calendar: buildCalendar(currentMonth(startDate)),
-      selectionState: 0,
+      selected: props.date ? props.date : undefined,
+      calendar: buildCalendar(currentMonth(currentDate)),
+      selectionState: props.startDate ? (props.endDate ? 2 : 1) : (props.endDate ? 1 : 0),
       selectionStates: [
         'initial',
         'started',
         'completed'
-      ]
+      ],
+      ...props
     }
 
     this.handleDayClick = this.handleDayClick.bind(this)
@@ -214,6 +215,15 @@ class Calendar extends Component {
         </Container>
       </ThemeProvider>
     )
+  }
+}
+
+Calendar.propTypes = {
+  date: PropTypes.string,
+  selected: (props, propName, componentName) => {
+    if (!(props.date || props.selected || props.rangeSelect || props.startDate || props.endDate)) {
+      return new Error('Cannont use "selected" with a range selection')
+    }
   }
 }
 
