@@ -1,30 +1,22 @@
-const daySize = `2.75em`
-const dayContainerMargin = `0.125em`
-const dayContentMargin = `0.125em`
-const dayContentSize = daySize - (dayContentMargin * 2)
+const daySize = `2.75em`;
+const dayContainerMargin = `0.125em`;
+const dayContentMargin = `0.125em`;
+const dayContentSize = daySize - dayContentMargin * 2;
 
 export const calendar = {
   timeContainer: {
-    timeContent: {
-
-    }
+    timeContent: {}
   },
   dateContainer: {
-    dateContent: {
-
-    }
+    dateContent: {}
   },
   monthControlContainer: {
-    monthControlContent: {
-
-    }
+    monthControlContent: {}
   },
   calendarContainer: {
     dayNamesContainer: {
       dayNameContainer: {
-        dayNameContent: {
-
-        }
+        dayNameContent: {}
       }
     },
     daysContainer: {
@@ -63,7 +55,7 @@ export const calendar = {
             width: `${dayContentSize}`,
             margin: `${dayContentMargin}`,
             lineHeight: `${dayContentSize}`,
-            ':hover': {
+            ":hover": {
               backgroundColor: `rgba(0, 0, 0, 0.5)`
             }
           },
@@ -79,4 +71,4 @@ export const calendar = {
       }
     }
   }
-}
+};
